@@ -17,3 +17,13 @@ app.get('/', (req, res) =>{
 app.listen(PORT, () =>{
     console.log(`Server is running on https://localhost:${PORT}`);
 });
+
+async function test(){
+    const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: "Hi, how are you"
+    })
+    console.log(response.text);
+}
+
+await test();
