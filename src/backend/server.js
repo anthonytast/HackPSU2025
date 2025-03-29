@@ -1,10 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import express from "express";
 import dotenv from "dotenv";
+import router from "./routes.js";
 
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+app.use("/api", router);
 const ai = new GoogleGenAI({ apiKey: process.env.AI_API_KEY });
 const PORT = process.env.PORT || 3001;  
 
