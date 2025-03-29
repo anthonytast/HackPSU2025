@@ -1,6 +1,9 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv"
+dotenv.config();
 
-const uri = `mongodb+srv://admin:hackpsu123@hackpsu2025.lb2db.mongodb.net/`;
+
+const uri = `mongodb+srv://admin:${process.env.MONGOPW}@hackpsu2025.lb2db.mongodb.net/`;
 const client = new MongoClient(uri)
 
 try{
