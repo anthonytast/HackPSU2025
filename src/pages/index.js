@@ -17,7 +17,11 @@ const geistMono = Geist_Mono({
 export default function Home() {
   return (
     <>
+<<<<<<< HEAD
      <Login />
+=======
+    <Login />
+>>>>>>> 90b6703760e3722a3d87b505d3e1691f5216a695
     </>
   );
 }

@@ -56,3 +56,14 @@
   .button:hover {
     background-color: #005bb5;
   }
+
+  .errorContainer {
+    margin-bottom: 15px;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin: 5px 0;
+    text-align: center;
+  }
