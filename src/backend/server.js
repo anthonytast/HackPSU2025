@@ -21,9 +21,9 @@ app.listen(PORT, () =>{
 async function test(){
     const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
-        contents: "Hi, how are you"
+        contents: "Generate a skeleton for a basic webapp"
     })
     console.log(response.text);
 }
 
-await test();
+//await test();
