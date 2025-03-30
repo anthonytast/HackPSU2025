@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -9,6 +10,8 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const router = useRouter();
 
   const handleLogin = async(e) =>{
     e.preventDefault();
@@ -21,14 +24,18 @@ export default function Login() {
         body: JSON.stringify({email, password})
       });
       
-      const data = response.json();
+      const data = await response.json();
       console.log(data);
       if(response.ok){
-        setMessage(data.message)
-        console.log("Button Clicked")
+        setMessage(data.message);
+        if(data.message == "Login Successful"){
+          router.push("/gemchat");
+        }
       }else{
         setMessage(data.error);
       }
+
+      // console.log(message)
     }catch(error){
       console.log("Error during login: " + error);
       setMessage("An error occureed. Please try again.");
@@ -54,7 +61,7 @@ export default function Login() {
             <input type="password" id="password" name="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <button type="submit" className={styles.button}>Login</button>
-          {message && <p>{message}</p>}
+          {message != "Login Successful" && <p>{message}</p>}
         </form>
         <a href="/signup" className={styles.link}>Don't have an account? Sign up</a>
       </div>
