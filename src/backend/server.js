@@ -24,12 +24,12 @@ app.listen(PORT, () =>{
     console.log(`Server is running on https://localhost:${PORT}`);
 });
 
-async function test(){
-    const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: "Generate a skeleton for a basic webapp"
-    })
-    console.log(response.text);
-}
+// async function test(){
+//     const response = await ai.models.generateContent({
+//         model: "gemini-2.0-flash",
+//         contents: "Generate a skeleton for a basic webapp"
+//     })
+//     console.log(response.text);
+// }
 
 //await test();
