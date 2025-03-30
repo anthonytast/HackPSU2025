@@ -14,6 +14,7 @@
   "dependencies": {
     "@google/genai": "^0.7.0",
     "concurrently": "^9.1.2",
+    "cors": "^2.8.5",
     "curl": "^0.1.4",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
