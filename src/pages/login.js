@@ -6,23 +6,26 @@ import styles from "@/styles/Login.module.css";
 
 export default function Login() {
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleLogin = async() =>{
+  const handleLogin = async(e) =>{
+    e.preventDefault();
     try{
       const response = await fetch("http://localhost:3001/api/sign-in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({email, password})
       });
-
+      
       const data = response.json();
+      console.log(data);
       if(response.ok){
         setMessage(data.message)
+        console.log("Button Clicked")
       }else{
         setMessage(data.error);
       }
@@ -41,16 +44,16 @@ export default function Login() {
       </Head>
       <div className={styles.container}>
         <h1 className={styles.title}>Login</h1>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleLogin}>
           <div className={styles.inputGroup}>
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+            <input type="email" id="email" name="email" placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)} required />
           </div>
           <div className={styles.inputGroup}>
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            <input type="password" id="password" name="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} required />
           </div>
-          <button type="submit" className={styles.button} onClick={handleLogin}>Login</button>
+          <button type="submit" className={styles.button}>Login</button>
           {message && <p>{message}</p>}
         </form>
         <a href="/signup" className={styles.link}>Don't have an account? Sign up</a>

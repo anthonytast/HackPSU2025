@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/api", router);
 const PORT = process.env.PORT || 3001;  
 
-const ai = new GoogleGenAI({ apiKey: process.env.AI_API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_AI_API_KEY });
 
 
 //Calls

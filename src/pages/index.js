@@ -18,11 +18,7 @@ const geistMono = Geist_Mono({
 export default function Home() {
   return (
     <>
-<<<<<<< HEAD
      <Login />
-=======
-    <Gemchat />
->>>>>>> ccccdb2 (added gemchat)
     </>
   );
 }

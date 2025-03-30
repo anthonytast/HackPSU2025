@@ -5,18 +5,19 @@ const router = express.Router();
 
 router.post("/create-account", async (req, res) =>{
     try{
-        const {username, password} = req.body;
+        const {firstName, lastName, email, password} = req.body;
+        console.log(req.body)
 
-        if(!username || !password){
+        if(!email || !password || !firstName || !lastName){
             return res.json({error: "Username and password required!"}).status(400);
         }
         
         const collection = db.collection("Authentication");
-        const existingUser = await collection.findOne({username});
+        const existingUser = await collection.findOne({email});
         if (existingUser){
-            return res.json({error: "Username already exists"})
+            return res.json({error: "Email already exists"})
         }
-        const result = await collection.insertOne({username: username, password: password})
+        const result = await collection.insertOne({email, password, firstName, lastName})
         res.json({message: "Account created!", userId: result.insertedId});
     } catch(err){
         console.log("Error creating account: ", error);
@@ -26,17 +27,18 @@ router.post("/create-account", async (req, res) =>{
 
 router.post("/sign-in", async(req, res) =>{
     try{
-        const {username, password} = req.body;
+        const {email, password} = req.body;
+        console.log(email, password);
 
-        if(!username || !password){
-            return res.json({error: "Username and password required"}).status(400);
+        if(!email || !password){
+            return res.json({error: "Email and password required"}).status(400);
         }
 
         const collection = db.collection("Authentication");
-        const user = await collection.findOne({username :username, password: password});
+        const user = await collection.findOne({email, password});
         
         if(!user){
-            return res.json({error: "Username or password invalid"}).status(401);
+            return res.json({error: "Email or password invalid"}).status(401);
         }
 
         return res.json({message: "Login Successful"});

@@ -11,7 +11,7 @@ export default function Signup() {
     const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
     const [errorMessages, setErrorMessages] = useState([]); // State to manage multiple error messages
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const errors = []; // Array to collect all error messages
@@ -39,11 +39,31 @@ export default function Signup() {
         // Clear error messages if all validations pass
         setErrorMessages([]);
 
-        console.log("First Name:", firstName);
-        console.log("Last Name:", lastName);
-        console.log("Email:", email);
-        console.log("Password:", password);
-        console.log("Confirm Password:", confirmPassword);
+        try{
+          const response = await fetch("http://localhost:3001/api/create-account", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({firstName, lastName, email, password,}),
+          });
+
+          const data = await response.json();
+          if(response.ok){
+            console.log("Account Created")
+          }else{
+            console.log("Error Creating Account");
+          }
+
+        }catch(error){
+          console.log("Error: " + error)
+        }
+
+        // console.log("First Name:", firstName);
+        // console.log("Last Name:", lastName);
+        // console.log("Email:", email);
+        // console.log("Password:", password);
+        // console.log("Confirm Password:", confirmPassword);
 
         // Add further logic for form submission here
     };
