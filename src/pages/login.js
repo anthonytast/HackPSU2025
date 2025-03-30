@@ -29,7 +29,11 @@ export default function Login() {
       if(response.ok){
         setMessage(data.message);
         if(data.message == "Login Successful"){
-          router.push("/gemchat");
+          router.push({
+            pathname: "/gemchat",
+            query: {email: email}
+            }
+          );
         }
       }else{
         setMessage(data.error);
@@ -61,7 +65,7 @@ export default function Login() {
             <input type="password" id="password" name="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)} required />
           </div>
           <button type="submit" className={styles.button}>Login</button>
-          {message != "Login Successful" && <p>{message}</p>}
+          {message != "Login Successful" && <p color="black">{message}</p>}
         </form>
         <a href="/signup" className={styles.link}>Don't have an account? Sign up</a>
       </div>
